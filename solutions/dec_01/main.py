@@ -1,7 +1,8 @@
+
 import pandas as pd
 
 # Path to Excel file
-excel_path = 'solutions/dec_01/data/dec_first_input.xlsx'
+excel_path = 'solutions/dec_01/data/input.xlsx'
 
 # Read Excel file, and convert columns into seperate Pandas DataFrames
 left_col_df = pd.read_excel(excel_path)['left_col']     # ", usecols='left_col')" would not work...
