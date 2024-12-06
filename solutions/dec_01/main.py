@@ -18,7 +18,7 @@ right_col_list.sort()
 
 # For each index i in left_col_list, calculate the distance to corresponding index in right_col_list
 all_distances_list = []
-for i in range(len(left_col_list)):
+for i in left_col_list:
              distance = abs(left_col_list[i]-right_col_list[i])
              all_distances_list.append(distance)
 
@@ -28,3 +28,4 @@ sum_all_distances = sum(all_distances_list)
 # Print result 
 print("Sum of all distances:")
 print(sum_all_distances)
+
