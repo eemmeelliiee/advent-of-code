@@ -30,11 +30,11 @@ def control_diff_consistancy(diff_list):
         consistant = False
     return consistant, diff_list
 
-# Sets consistant diff_lists where values are in accepted range as 'safe', and inconsistent and out-of-range as not safe.
+# Sets diff_lists where values are both 'consistant' and within accepted range as 'safe', and inconsistent and out-of-range as not safe.
 def control_diff_amount(consistant, diff_list):
     if consistant:
         for diff in diff_list:
-            if abs(diff) in[1,2,3]:
+            if abs(diff) in[1,2,3]: # Accepted range
                 safe = True
             else:
                 safe = False
