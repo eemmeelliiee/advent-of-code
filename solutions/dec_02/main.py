@@ -1,20 +1,21 @@
-# Splits .txt file into two lists
-report_list = []
+# Splits .txt file into a list of reports
+reports = []
 with open("solutions/dec_02/data/input.txt", 'r') as file_data: 
     for line in file_data: 
         data = line.split() 
-        report_list.append(data)
+        reports.append(data)
 
-# Calculates the difference between adjecent values and returns values as a List
+# Calculates the difference between all adjacent elements for a report, then returns values as a 'diff_list'
 def calculate_diff(report):
     i = 0
     diff_list = []
-    for value in range(len(report)-1):
+    for element in range(len(report)-1):
         diff = int(report[i+1])-int(report[i])
         diff_list.append(diff)
         i+=1
     return diff_list
 
+# Controls if values in 'diff_list' are consistant, then returns it with determined consistancy boolean
 def control_diff_consistancy(diff_list):
     increase_list = []
     decrease_list = []
@@ -23,13 +24,14 @@ def control_diff_consistancy(diff_list):
             increase_list.append(diff)
         elif diff < 0:
             decrease_list.append(diff)
-    if len(increase_list) == len(diff_list) or len(decrease_list) == len(diff_list): 
+    if len(increase_list) == len(diff_list) or len(decrease_list) == len(diff_list): # Controls if all values in list are consistant; either all increasing or all decreasing
         consistant = True
     else:
         consistant = False
-    return diff_list, consistant
-        
-def control_diff_amount(diff_list, consistant):
+    return consistant, diff_list
+
+# Sets consistant diff_lists where values are in accepted range as 'safe', and inconsistent and out-of-range as not safe.
+def control_diff_amount(consistant, diff_list):
     if consistant:
         for diff in diff_list:
             if abs(diff) in[1,2,3]:
@@ -41,21 +43,23 @@ def control_diff_amount(diff_list, consistant):
         safe = False
     return safe
 
-safe_list = []
-unsafe_list = []
-for report in report_list:
-    try: 
-        diff_list, consistant = control_diff_consistancy(calculate_diff(report))
-        if control_diff_amount(diff_list, consistant):
-            safe_list.append(report)
-        else:
-            unsafe_list.append(report)
-    except: 
-        print("Could't calculate safety for: ")
-        print(report)
+# Saves safe and unsafe reports into seperate lists
+safe_reports = []
+unsafe_reports = []
+for report in reports:
+    diff_list = calculate_diff(report) # Get 'diff_list' for report
+    consistant, diff_list = control_diff_consistancy(diff_list) # Get corresponding consistency boolean for 'diff_list'
+    safe = control_diff_amount(consistant, diff_list) # Get safety info
 
-tot_safe = len(safe_list)
-tot_unsafe = len(unsafe_list)
+    if safe:
+        safe_reports.append(report)
+    else:
+        unsafe_reports.append(report)
 
+# Calculates tot amount of safe and unsafe reports
+tot_safe = len(safe_reports)
+tot_unsafe = len(unsafe_reports)
+
+# Prints tot amount of safe reports
+print("Tot safe reports: ")
 print(tot_safe)
-
