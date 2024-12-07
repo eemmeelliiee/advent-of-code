@@ -7,12 +7,10 @@ with open("solutions/dec_02/data/input.txt", 'r') as file_data:
 
 # Calculates the difference between all adjacent elements for a report, then returns values as a 'diff_list'
 def calculate_diff(report):
-    i = 0
     diff_list = []
-    for element in range(len(report)-1):
+    for i in range(len(report)-1):
         diff = int(report[i+1])-int(report[i])
         diff_list.append(diff)
-        i+=1
     return diff_list
 
 # Controls if values in 'diff_list' are consistant, then returns it with determined consistancy boolean
@@ -63,3 +61,4 @@ tot_unsafe = len(unsafe_reports)
 # Prints tot amount of safe reports
 print("Tot safe reports: ")
 print(tot_safe)
+
