@@ -26,7 +26,7 @@ def control_diff_consistancy(diff_list):
         consistant = True
     else:
         consistant = False
-    return diff_list,consistant
+    return consistant
 
 # Sets diff_lists where values are both 'consistant' and within accepted range as 'safe', and inconsistent and out-of-range as not safe.
 def control_diff_amount(diff_list, consistant):
@@ -46,7 +46,7 @@ safe_reports = []
 unsafe_reports = []
 for report in reports:
     diff_list = calculate_diff(report) # Get 'diff_list' for report
-    diff_list, consistant = control_diff_consistancy(diff_list) # Get corresponding consistency boolean for 'diff_list'
+    consistant = control_diff_consistancy(diff_list) # Get corresponding consistency boolean for 'diff_list'
     safe = control_diff_amount(diff_list, consistant) # Get concluded safety info
 
     if safe:
